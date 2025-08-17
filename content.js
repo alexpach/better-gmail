@@ -5,6 +5,15 @@
   var YELLOW_ID = 'YVid1';
   var YELLOW_INNER_ID = 'YVid2';
 
+  var RED_ID = 'RSid1';
+  var RED_INNER_ID = 'RSid2';
+  var GREEN_ID = 'GSid1';
+  var GREEN_INNER_ID = 'GSid2';
+  var BLUE_ID = 'BSid1';
+  var BLUE_INNER_ID = 'BSid2';
+  var PURPLE_ID = 'PSid1';
+  var PURPLE_INNER_ID = 'PSid2';
+
   function listRoot() { return document.getElementsByClassName('TK')[0]; }
   const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   function isActive(hash) { return decodeURIComponent(location.hash || '') === hash; }
@@ -155,6 +164,72 @@
     return yMain;
   }
 
+  function buildWhiteStarIcon() {
+    var yIcon = document.createElement('div');
+    yIcon.className = 'qj';
+    yIcon.style.background = 'none';
+    yIcon.style.backgroundImage = 'none';
+    yIcon.style.display = 'flex';
+    yIcon.style.alignItems = 'center';
+    yIcon.style.justifyContent = 'center';
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('width', '18');
+    svg.setAttribute('height', '18');
+    var path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('d','M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z');
+    path.setAttribute('fill','#ffffff');
+    svg.appendChild(path);
+    yIcon.appendChild(svg);
+    return yIcon;
+  }
+
+  function buildStarRow(mainId, innerId, labelText, tooltip, hashFrag) {
+    var base = window.location.origin + window.location.pathname;
+    var active = isActive(hashFrag);
+
+    var m = document.createElement('div');
+    m.id = mainId; m.className = 'aim';
+
+    var i1 = document.createElement('div');
+    i1.id = innerId; i1.className = 'TO aS3';
+    i1.setAttribute('data-tooltip', tooltip);
+    i1.setAttribute('data-tooltip-align','r');
+
+    var i2 = document.createElement('div'); i2.className = 'TN UKr6le';
+    var icon = buildWhiteStarIcon();
+    var wrap = document.createElement('div'); wrap.className = 'aio UKr6le';
+    var span = document.createElement('span'); span.className = 'nU';
+
+    var a = document.createElement('a');
+    a.className = 'J-Ke n0';
+    a.href = base + '#search/' + encodeURIComponent(hashFrag.slice('#search/'.length));
+    a.target = '_top';
+    a.setAttribute('aria-label', tooltip);
+    a.setAttribute('tabindex','-1');
+    a.setAttribute('draggable','false');
+    a.textContent = labelText;
+
+    m.addEventListener('click', function (e) { e.preventDefault(); window.location.href = a.href; });
+
+    span.appendChild(a);
+    var right = document.createElement('div'); right.className = 'nL aif';
+
+    wrap.appendChild(span);
+    i2.appendChild(icon);
+    i2.appendChild(wrap);
+    i2.appendChild(right);
+    i1.appendChild(i2);
+    m.appendChild(i1);
+
+    if (active) {
+      m.classList.add('ain');
+      i1.classList.add('nZ','aiq');
+    }
+    return m;
+  }
+
   function insertAtIndex(list, row, index) {
     const kids = list ? list.children : null;
     if (!kids) { list.appendChild(row); return; }
@@ -169,6 +244,15 @@
     for (var i = 0; i < anchors.length; i++) {
       var aim = anchors[i].closest && anchors[i].closest('.aim');
       if (aim && aim.parentNode === list) return aim;
+    }
+    return null;
+  }
+
+  function lastCustomStarRow(list) {
+    var ids = [YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
+    for (var i = ids.length - 1; i >= 0; i--) {
+      var el = document.getElementById(ids[i]);
+      if (el && el.parentNode === list) return el;
     }
     return null;
   }
@@ -191,6 +275,29 @@
     }
   }
 
+  function insertStarAfter(list, newRow) {
+    var tail = lastCustomStarRow(list);
+    if (tail && tail.nextSibling) list.insertBefore(newRow, tail.nextSibling);
+    else if (tail) list.appendChild(newRow);
+    else {
+      var topLabel = firstLabelRow(list);
+      if (topLabel) list.insertBefore(newRow, topLabel); else list.appendChild(newRow);
+    }
+  }
+
+  function insertRed(list) {
+    if (!document.getElementById(RED_ID)) insertStarAfter(list, buildStarRow(RED_ID, RED_INNER_ID, 'Red ★', 'Red Star', '#search/has:red-star'));
+  }
+  function insertGreen(list) {
+    if (!document.getElementById(GREEN_ID)) insertStarAfter(list, buildStarRow(GREEN_ID, GREEN_INNER_ID, 'Green ★', 'Green Star', '#search/has:green-star'));
+  }
+  function insertBlue(list) {
+    if (!document.getElementById(BLUE_ID)) insertStarAfter(list, buildStarRow(BLUE_ID, BLUE_INNER_ID, 'Blue ★', 'Blue Star', '#search/has:blue-star'));
+  }
+  function insertPurple(list) {
+    if (!document.getElementById(PURPLE_ID)) insertStarAfter(list, buildStarRow(PURPLE_ID, PURPLE_INNER_ID, 'Purple ★', 'Purple Star', '#search/has:purple-star'));
+  }
+
   function refreshActiveStates() {
     var activeUnread = (location.hash === '#search/is%3Aunread');
     var uInner = document.getElementById(UNREAD_INNER_ID);
@@ -208,6 +315,26 @@
       yInner.classList.toggle('nZ', activeYellow);
       yInner.classList.toggle('aiq', activeYellow);
     }
+
+    var redActive = isActive('#search/has:red-star');
+    var rInner = document.getElementById(RED_INNER_ID);
+    var rMain  = document.getElementById(RED_ID);
+    if (rInner && rMain) { rMain.classList.toggle('ain', redActive); rInner.classList.toggle('nZ', redActive); rInner.classList.toggle('aiq', redActive); }
+
+    var greenActive = isActive('#search/has:green-star');
+    var gInner = document.getElementById(GREEN_INNER_ID);
+    var gMain  = document.getElementById(GREEN_ID);
+    if (gInner && gMain) { gMain.classList.toggle('ain', greenActive); gInner.classList.toggle('nZ', greenActive); gInner.classList.toggle('aiq', greenActive); }
+
+    var blueActive = isActive('#search/has:blue-star');
+    var bInner = document.getElementById(BLUE_INNER_ID);
+    var bMain  = document.getElementById(BLUE_ID);
+    if (bInner && bMain) { bMain.classList.toggle('ain', blueActive); bInner.classList.toggle('nZ', blueActive); bInner.classList.toggle('aiq', blueActive); }
+
+    var purpleActive = isActive('#search/has:purple-star');
+    var pInner = document.getElementById(PURPLE_INNER_ID);
+    var pMain  = document.getElementById(PURPLE_ID);
+    if (pInner && pMain) { pMain.classList.toggle('ain', purpleActive); pInner.classList.toggle('nZ', purpleActive); pInner.classList.toggle('aiq', purpleActive); }
   }
 
   async function boot() {
@@ -215,6 +342,10 @@
     if (!list) return;
     insertUnread(list);
     insertYellow(list);
+    insertRed(list);
+    insertGreen(list);
+    insertBlue(list);
+    insertPurple(list);
     refreshActiveStates();
     window.addEventListener('hashchange', refreshActiveStates);
   }
