@@ -6,7 +6,9 @@ Use this list to implement improvements one at a time. Each item has clear accep
 - [ ] Add a lightweight `MutationObserver` scoped to the left sidebar container `.TK` to detect removals/refreshes.
 - [ ] Throttle or debounce (e.g., 250–500ms) to avoid excessive work.
 - [ ] On detected removal/missing nodes, re-run insertion for custom rows only once per stabilization cycle.
-- [ ] Fallback: on `hashchange`, verify rows exist and re-insert if missing.
+- [x] Fallback: on `hashchange`, verify rows exist and re-insert/move (debounced).
+- [x] Listen to `chrome.storage.onChanged` and reconcile when options change.
+- [x] Post-boot delayed reconcile (e.g., ~1200ms) to catch late sidebar changes.
 
 ## 2) Reduce DOM Fragility
 - [ ] Prefer cloning a nearby native row (e.g., Starred or a label) to inherit Gmail classes.
@@ -23,16 +25,19 @@ Use this list to implement improvements one at a time. Each item has clear accep
 - [x] Ensure tooltips and ARIA labels remain in English consistently.
 
 ## 5) Options (Optional, if desired)
-- [ ] Add an Options page to enable/disable specific star rows and control their order.
-- [ ] Persist preferences via `chrome.storage.sync`.
-- [ ] Respect options at boot and during re-insertion.
+- [x] Add an Options page to enable/disable specific star rows and control their order.
+- [x] Persist preferences via `chrome.storage.sync`.
+- [x] Respect options at boot.
+- [x] Respect options during lightweight re-insertion (remove disabled rows; reorder enabled).
 
 ## 6) Manifest & Packaging
+- [x] Wire `options_page` and request `"storage"` permission in `manifest.json`.
 - [ ] Add `short_name` and `icons` (16/32/48/128). Provide a 128×128 for Web Store.
 - [ ] Consider an `action` linking to Options/help once options exist.
 - [ ] Validate MV3 compliance and permissions remain minimal.
 
 ## 7) Code Hygiene
+- [x] Fix insertion ordering bug (DOM-based tail detection; unify Yellow insertion path).
 - [ ] Remove unused `getStarredClasses` or repurpose it for the cloning approach.
 - [ ] Optional: add ESLint/Prettier with a minimal config (no build step needed yet).
 - [ ] Keep functions small and focused; document key selectors.
@@ -47,9 +52,7 @@ Use this list to implement improvements one at a time. Each item has clear accep
 ---
 
 Suggested Implementation Order
-1. Accessibility (quick wins, low risk)
-2. Re‑insertion guard (stability)
-3. Reduce DOM fragility via cloning
-4. Manifest + README polish
-5. Localization basics
-6. Options (if product direction needs it)
+1. Re‑insertion guard (stability)
+2. Reduce DOM fragility via cloning
+3. Manifest + README polish
+4. Cross‑browser testing (optional)

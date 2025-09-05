@@ -35,6 +35,19 @@
     return decodeURIComponent(location.hash || "") === hash;
   }
 
+  // Lightweight debounce helper
+  function debounce(fn, wait) {
+    var t = null;
+    return function () {
+      if (t) clearTimeout(t);
+      var args = arguments;
+      var self = this;
+      t = setTimeout(function () {
+        fn.apply(self, args);
+      }, wait);
+    };
+  }
+
   function normalizeSettings(s) {
     var known = DEFAULT_SETTINGS.order.slice();
     var set = new Set(known);
@@ -402,6 +415,82 @@
     insertStarAfter(list, buildYellowRow());
   }
 
+  function keyToId(key) {
+    if (key === "unread") return UNREAD_ID;
+    if (key === "yellow") return YELLOW_ID;
+    if (key === "red") return RED_ID;
+    if (key === "green") return GREEN_ID;
+    if (key === "blue") return BLUE_ID;
+    if (key === "purple") return PURPLE_ID;
+    return null;
+  }
+
+  function insertByKey(list, key) {
+    if (key === "unread") insertUnread(list);
+    else if (key === "yellow") insertYellow(list);
+    else if (key === "red") insertRed(list);
+    else if (key === "green") insertGreen(list);
+    else if (key === "blue") insertBlue(list);
+    else if (key === "purple") insertPurple(list);
+  }
+
+  var isReconciling = false;
+
+  async function ensureRows() {
+    if (isReconciling) return;
+    var list = listRoot();
+    if (!list) return;
+    isReconciling = true;
+    try {
+      var settings = await getSettings();
+      var order = (settings && settings.order) || DEFAULT_SETTINGS.order;
+      var enabled = (settings && settings.enabled) || DEFAULT_SETTINGS.enabled;
+      var desired = [];
+      for (var i = 0; i < order.length; i++) {
+        var k = order[i];
+        if (enabled[k]) desired.push(k);
+      }
+
+      // Remove disabled rows, if any are present
+      var known = DEFAULT_SETTINGS.order;
+      for (var d = 0; d < known.length; d++) {
+        var keyd = known[d];
+        if (enabled[keyd]) continue;
+        var idd = keyToId(keyd);
+        var eld = idd && document.getElementById(idd);
+        if (eld && eld.parentNode === list) {
+          eld.parentNode.removeChild(eld);
+        }
+      }
+
+      // Ensure existence
+      for (var j = 0; j < desired.length; j++) {
+        var key = desired[j];
+        var id = keyToId(key);
+        if (!id) continue;
+        if (!document.getElementById(id)) insertByKey(list, key);
+      }
+
+      // Reorder by moving existing nodes before the first user label
+      var topLabel = firstLabelRow(list);
+      for (var m = 0; m < desired.length; m++) {
+        var key2 = desired[m];
+        var id2 = keyToId(key2);
+        var el = document.getElementById(id2);
+        if (el && el.parentNode === list) {
+          if (topLabel) list.insertBefore(el, topLabel);
+          else list.appendChild(el);
+        }
+      }
+    } catch (e) {
+      // swallow to avoid impacting page
+    } finally {
+      isReconciling = false;
+    }
+  }
+
+  var ensureRowsDebounced = debounce(ensureRows, 300);
+
   function insertStarAfter(list, newRow) {
     var tail = lastCustomStarRow(list);
     if (tail && tail.nextSibling) list.insertBefore(newRow, tail.nextSibling);
@@ -538,7 +627,26 @@
       else if (key === "purple") insertPurple(list);
     }
     refreshActiveStates();
-    window.addEventListener("hashchange", refreshActiveStates);
+    // Events: keep active states and lightly reconcile
+    window.addEventListener("hashchange", function () {
+      refreshActiveStates();
+      ensureRowsDebounced();
+    });
+
+    // Apply a post-boot reconcile to catch late UI shifts
+    setTimeout(ensureRows, 1200);
+
+    // Live-update on options changes
+    try {
+      if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.onChanged) {
+        chrome.storage.onChanged.addListener(function (changes, area) {
+          if (area === "sync" && changes && changes[STORAGE_KEY]) {
+            ensureRowsDebounced();
+            refreshActiveStates();
+          }
+        });
+      }
+    } catch (e) {}
   }
 
   if (
