@@ -105,19 +105,11 @@
     return listRoot();
   }
 
-  // Unused now; previously used to copy Starred's classes for Yellow Star row
-  function getStarredClasses() {
-    var a = document.querySelector(
-      'a[href*="#starred"], a[aria-label*="Starred"]'
-    );
-    var row = a && a.closest ? a.closest(".aim") : null;
-    var to = row ? row.querySelector(".TO") : null;
-    var tn = row ? row.querySelector(".TN, .TN.UKr6le") : null;
-    return {
-      toClass: to ? to.className : "TO",
-      tnClass: tn ? tn.className : "TN UKr6le",
-    };
-  }
+  // Key selector reference:
+  // - Sidebar root: `.TK`
+  // - Row container: `.aim` (active gets `.ain`)
+  // - Inner wrapper: `.TO` (active adds `.nZ.aiq`)
+  // - Row parts: icon box `.qj`, content `.aio`, label `.nU`, right `.nL`
 
   function buildUnreadRow() {
     var base = window.location.origin + window.location.pathname;

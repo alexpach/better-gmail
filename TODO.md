@@ -2,33 +2,25 @@
 
 Focused list of next improvements, trimmed to active items only.
 
-## Stability & Resilience
-- [ ] Add a lightweight `MutationObserver` on `.TK` (left sidebar) to detect removals/refreshes.
-- [ ] Throttle/debounce reinsertions (≈250–500ms) to prevent excessive work.
-- [ ] On detected removal/missing nodes, re-run insertion for custom rows once per stabilization cycle.
-
-## DOM Robustness
-- [ ] Prefer cloning a nearby native row (e.g., Starred or a label) to inherit Gmail classes.
-- [ ] Replace brittle hardcoded class sets where safe; keep current classes as fallback.
-- [ ] Centralize selectors/classnames in a small helper to ease future updates.
+## DOM Robustness (Deferred)
+No changes for this version per scope decision.
 
 ## Manifest & UX
-- [ ] Consider an `action` that opens Options/help and uses the same icon set.
-- [ ] Validate MV3 compliance and keep permissions minimal.
+- [x] Add an `action` that opens Options and uses the same icon set.
+- [x] Validate MV3 compliance and keep permissions minimal (content script + storage only).
 
 ## Code Hygiene
-- [ ] Remove unused `getStarredClasses` or repurpose it for the cloning approach.
+- [x] Remove unused `getStarredClasses`.
 - [ ] Optional: add ESLint/Prettier with a minimal config (no build step needed).
-- [ ] Keep functions small and focused; document key selectors in code comments.
+- [x] Add brief comments to document key selectors.
 
 ## Documentation
-- [ ] README: add install steps (Load unpacked), feature list, screenshots, and a privacy note.
-- [ ] README: add a brief support/issue section.
+- [x] README: confirm install steps, features, privacy; note toolbar action.
+- [x] README: include brief support/issue details.
 
 ---
 
 Suggested Implementation Order
-1. Stability & Resilience
-2. DOM Robustness
-3. Manifest & UX
-4. Documentation
+1. Manifest & UX
+2. Documentation
+3. Code Hygiene polish (optional tooling)

@@ -9,6 +9,7 @@ Features
 - Accessibility: rows are focusable and activate via Enter/Space.
 - Lightweight resilience: reconciles after navigation changes, settings updates, and shortly after load.
 - Minimal permissions: uses `storage` only; runs as a content script on Gmail.
+ - Toolbar action: click the extension icon to open Options.
 
 Supported Browser/Site
 - Chrome (Manifest V3)
@@ -22,6 +23,7 @@ Install (Load Unpacked)
 4) Click “Load unpacked” and select the project folder.
 5) In the extension’s “Details”, open “Extension options” to configure order and visibility.
 6) Open Gmail and use the new sidebar rows.
+7) Optional: Pin the toolbar icon; clicking it opens Options.
 
 Privacy
 - No analytics, no external network requests, and no data collection.
