@@ -70,14 +70,7 @@
     var base = window.location.origin + window.location.pathname;
     var url = base + "#search/is%3Aunread";
     var active = isActive("#search/is:unread");
-
-    var htmlLang = document.documentElement.lang;
-    var label =
-      htmlLang == "uk"
-        ? "Непрочитані"
-        : htmlLang == "ru"
-        ? "Непрочитаные"
-        : "Unread";
+    var label = "Unread"; // Localization removed: use English consistently
 
     var uMain = document.createElement("div");
     uMain.id = UNREAD_ID;
@@ -103,13 +96,25 @@
     uA.href = url;
     uA.target = "_top";
     uA.setAttribute("aria-label", "Unread");
+    // Anchor hidden from tab order; container is the focusable link
     uA.setAttribute("tabindex", "-1");
+    uA.setAttribute("aria-hidden", "true");
     uA.setAttribute("draggable", "false");
     uA.textContent = label;
 
+    // Make the whole row accessible as a link
+    uMain.setAttribute("role", "link");
+    uMain.setAttribute("tabindex", "0");
+    uMain.setAttribute("aria-label", "Unread");
     uMain.addEventListener("click", function (e) {
       e.preventDefault();
       window.location.href = uA.href;
+    });
+    uMain.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.location.href = uA.href;
+      }
     });
 
     uSpan.appendChild(uA);
@@ -178,13 +183,25 @@
     yA.href = base + "#search/has%3Ayellow-star";
     yA.target = "_top";
     yA.setAttribute("aria-label", "Yellow Star");
+    // Anchor hidden from tab order; container is the focusable link
     yA.setAttribute("tabindex", "-1");
+    yA.setAttribute("aria-hidden", "true");
     yA.setAttribute("draggable", "false");
     yA.textContent = "Yellow";
 
+    // Make the whole row accessible as a link
+    yMain.setAttribute("role", "link");
+    yMain.setAttribute("tabindex", "0");
+    yMain.setAttribute("aria-label", "Yellow Star");
     yMain.addEventListener("click", function (e) {
       e.preventDefault();
       window.location.href = yA.href;
+    });
+    yMain.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.location.href = yA.href;
+      }
     });
 
     ySpan.appendChild(yA);
@@ -257,13 +274,25 @@
       base + "#search/" + encodeURIComponent(hashFrag.slice("#search/".length));
     a.target = "_top";
     a.setAttribute("aria-label", tooltip);
+    // Anchor hidden from tab order; container is the focusable link
     a.setAttribute("tabindex", "-1");
+    a.setAttribute("aria-hidden", "true");
     a.setAttribute("draggable", "false");
     a.textContent = labelText;
 
+    // Make the whole row accessible as a link
+    m.setAttribute("role", "link");
+    m.setAttribute("tabindex", "0");
+    m.setAttribute("aria-label", tooltip);
     m.addEventListener("click", function (e) {
       e.preventDefault();
       window.location.href = a.href;
+    });
+    m.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.location.href = a.href;
+      }
     });
 
     span.appendChild(a);
