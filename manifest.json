@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Better Gmail Sidebar",
   "version": "1.0.0",
-  "description": "Adds an 'Unread' button between Inbox and Starred in Gmail's left sidebar.",
+  "description": "Adds an 'Unread' button and shortcut to different 'Starred' colors in Gmail's left sidebar.",
   "permissions": [],
   "host_permissions": ["https://mail.google.com/*"],
   "content_scripts": [

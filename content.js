@@ -1,38 +1,52 @@
 // content.js — Unread + Yellow ★ (stable insert once, no observers)
 (function () {
-  var UNREAD_ID = 'BVid1';
-  var UNREAD_INNER_ID = 'BVid2';
-  var YELLOW_ID = 'YVid1';
-  var YELLOW_INNER_ID = 'YVid2';
+  var UNREAD_ID = "BVid1";
+  var UNREAD_INNER_ID = "BVid2";
+  var YELLOW_ID = "YVid1";
+  var YELLOW_INNER_ID = "YVid2";
+  var RED_ID = "RSid1";
+  var RED_INNER_ID = "RSid2";
+  var GREEN_ID = "GSid1";
+  var GREEN_INNER_ID = "GSid2";
+  var BLUE_ID = "BSid1";
+  var BLUE_INNER_ID = "BSid2";
+  var PURPLE_ID = "PSid1";
+  var PURPLE_INNER_ID = "PSid2";
 
-  var RED_ID = 'RSid1';
-  var RED_INNER_ID = 'RSid2';
-  var GREEN_ID = 'GSid1';
-  var GREEN_INNER_ID = 'GSid2';
-  var BLUE_ID = 'BSid1';
-  var BLUE_INNER_ID = 'BSid2';
-  var PURPLE_ID = 'PSid1';
-  var PURPLE_INNER_ID = 'PSid2';
-
-  function listRoot() { return document.getElementsByClassName('TK')[0]; }
-  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-  function isActive(hash) { return decodeURIComponent(location.hash || '') === hash; }
+  function listRoot() {
+    return document.getElementsByClassName("TK")[0];
+  }
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  function isActive(hash) {
+    return decodeURIComponent(location.hash || "") === hash;
+  }
 
   // Wait until the sidebar stops changing before inserting (prevents flicker/dupes)
-  async function waitForStableTK(maxMs = 2000, probeEvery = 150, stableNeeded = 4) {
+  async function waitForStableTK(
+    maxMs = 2000,
+    probeEvery = 150,
+    stableNeeded = 4
+  ) {
     const start = Date.now();
-    let lastSig = null, stable = 0;
+    let lastSig = null,
+      stable = 0;
     while (Date.now() - start < maxMs) {
       const root = listRoot();
-      if (!root) { await sleep(probeEvery); continue; }
-      const labels = Array.from(root.querySelectorAll('.aim .nU'))
+      if (!root) {
+        await sleep(probeEvery);
+        continue;
+      }
+      const labels = Array.from(root.querySelectorAll(".aim .nU"))
         .slice(0, 8)
-        .map(s => (s.textContent || '').trim())
-        .join('|');
-      const sig = root.childElementCount + ':' + labels;
+        .map((s) => (s.textContent || "").trim())
+        .join("|");
+      const sig = root.childElementCount + ":" + labels;
       if (sig === lastSig) {
         if (++stable >= stableNeeded) return root;
-      } else { stable = 0; lastSig = sig; }
+      } else {
+        stable = 0;
+        lastSig = sig;
+      }
       await sleep(probeEvery);
     }
     return listRoot();
@@ -40,51 +54,67 @@
 
   // Unused now; previously used to copy Starred's classes for Yellow Star row
   function getStarredClasses() {
-    var a = document.querySelector('a[href*="#starred"], a[aria-label*="Starred"]');
-    var row = a && a.closest ? a.closest('.aim') : null;
-    var to  = row ? row.querySelector('.TO') : null;
-    var tn  = row ? row.querySelector('.TN, .TN.UKr6le') : null;
+    var a = document.querySelector(
+      'a[href*="#starred"], a[aria-label*="Starred"]'
+    );
+    var row = a && a.closest ? a.closest(".aim") : null;
+    var to = row ? row.querySelector(".TO") : null;
+    var tn = row ? row.querySelector(".TN, .TN.UKr6le") : null;
     return {
-      toClass: to ? to.className : 'TO',
-      tnClass: tn ? tn.className : 'TN UKr6le'
+      toClass: to ? to.className : "TO",
+      tnClass: tn ? tn.className : "TN UKr6le",
     };
   }
 
   function buildUnreadRow() {
     var base = window.location.origin + window.location.pathname;
-    var url = base + '#search/is%3Aunread';
-    var active = isActive('#search/is:unread');
+    var url = base + "#search/is%3Aunread";
+    var active = isActive("#search/is:unread");
 
     var htmlLang = document.documentElement.lang;
-    var label = htmlLang == 'uk' ? 'Непрочитані' : htmlLang == 'ru' ? 'Непрочитаные' : 'Unread';
+    var label =
+      htmlLang == "uk"
+        ? "Непрочитані"
+        : htmlLang == "ru"
+        ? "Непрочитаные"
+        : "Unread";
 
-    var uMain = document.createElement('div');
+    var uMain = document.createElement("div");
     uMain.id = UNREAD_ID;
-    uMain.className = active ? 'aim ain' : 'aim';
+    uMain.className = active ? "aim ain" : "aim";
 
-    var uInner1 = document.createElement('div');
+    var uInner1 = document.createElement("div");
     uInner1.id = UNREAD_INNER_ID;
-    uInner1.className = active ? 'TO aS3 nZ aiq' : 'TO aS3';
-    uInner1.setAttribute('data-tooltip', 'Unread');
-    uInner1.setAttribute('data-tooltip-align', 'r');
+    uInner1.className = active ? "TO aS3 nZ aiq" : "TO aS3";
+    uInner1.setAttribute("data-tooltip", "Unread");
+    uInner1.setAttribute("data-tooltip-align", "r");
 
-    var uInner2 = document.createElement('div'); uInner2.className = 'TN UKr6le';
-    var uIcon   = document.createElement('div'); uIcon.className   = 'qj';
-    var uWrap   = document.createElement('div'); uWrap.className   = 'aio UKr6le';
-    var uSpan   = document.createElement('span'); uSpan.className  = 'nU';
+    var uInner2 = document.createElement("div");
+    uInner2.className = "TN UKr6le";
+    var uIcon = document.createElement("div");
+    uIcon.className = "qj";
+    var uWrap = document.createElement("div");
+    uWrap.className = "aio UKr6le";
+    var uSpan = document.createElement("span");
+    uSpan.className = "nU";
 
-    var uA = document.createElement('a');
-    uA.className = 'J-Ke n0';
-    uA.href = url; uA.target = '_top';
-    uA.setAttribute('aria-label','Unread');
-    uA.setAttribute('tabindex','-1');
-    uA.setAttribute('draggable','false');
+    var uA = document.createElement("a");
+    uA.className = "J-Ke n0";
+    uA.href = url;
+    uA.target = "_top";
+    uA.setAttribute("aria-label", "Unread");
+    uA.setAttribute("tabindex", "-1");
+    uA.setAttribute("draggable", "false");
     uA.textContent = label;
 
-    uMain.addEventListener('click', function (e) { e.preventDefault(); window.location.href = uA.href; });
+    uMain.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = uA.href;
+    });
 
     uSpan.appendChild(uA);
-    var uRight = document.createElement('div'); uRight.className = 'nL aif';
+    var uRight = document.createElement("div");
+    uRight.className = "nL aif";
 
     uWrap.appendChild(uSpan);
     uInner2.appendChild(uIcon);
@@ -92,63 +122,74 @@
     uInner2.appendChild(uRight);
     uInner1.appendChild(uInner2);
     uMain.appendChild(uInner1);
+
     return uMain;
   }
 
   function buildYellowRow() {
     var base = window.location.origin + window.location.pathname;
-    var active = isActive('#search/has:yellow-star');
+    var active = isActive("#search/has:yellow-star");
 
-    var yMain = document.createElement('div');
-    yMain.id = YELLOW_ID; yMain.className = 'aim';
+    var yMain = document.createElement("div");
+    yMain.id = YELLOW_ID;
+    yMain.className = "aim";
 
-    var yInner1 = document.createElement('div');
+    var yInner1 = document.createElement("div");
     yInner1.id = YELLOW_INNER_ID;
-    yInner1.className = 'TO aS3';
-    yInner1.setAttribute('data-tooltip','Yellow Star');
-    yInner1.setAttribute('data-tooltip-align','r');
+    yInner1.className = "TO aS3";
+    yInner1.setAttribute("data-tooltip", "Yellow Star");
+    yInner1.setAttribute("data-tooltip-align", "r");
 
-    var yInner2 = document.createElement('div');
-    yInner2.className = 'TN UKr6le'; // generic; avoids Gmail special-casing
+    var yInner2 = document.createElement("div");
+    yInner2.className = "TN UKr6le"; // generic; avoids Gmail special-casing
 
-    var yIcon = document.createElement('div');
-    yIcon.className = 'qj';
+    var yIcon = document.createElement("div");
+    yIcon.className = "qj";
     // Remove Gmail's sprite background so only our SVG shows
-    yIcon.style.background = 'none';
-    yIcon.style.backgroundImage = 'none';
+    yIcon.style.background = "none";
+    yIcon.style.backgroundImage = "none";
     // Center the SVG within the qj box
-    yIcon.style.display = 'flex';
-    yIcon.style.alignItems = 'center';
-    yIcon.style.justifyContent = 'center';
+    yIcon.style.display = "flex";
+    yIcon.style.alignItems = "center";
+    yIcon.style.justifyContent = "center";
 
     // Inline SVG star (forced white)
-    var svgNS = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('width', '18');
-    svg.setAttribute('height', '18');
-    var path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('d','M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z');
-    path.setAttribute('fill','#ffffff');
+    var svgNS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", "18");
+    svg.setAttribute("height", "18");
+    var path = document.createElementNS(svgNS, "path");
+    path.setAttribute(
+      "d",
+      "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+    );
+    path.setAttribute("fill", "#ffffff");
     svg.appendChild(path);
     yIcon.appendChild(svg);
 
-    var yWrap = document.createElement('div'); yWrap.className = 'aio UKr6le';
-    var ySpan = document.createElement('span'); ySpan.className = 'nU';
+    var yWrap = document.createElement("div");
+    yWrap.className = "aio UKr6le";
+    var ySpan = document.createElement("span");
+    ySpan.className = "nU";
 
-    var yA = document.createElement('a');
-    yA.className = 'J-Ke n0';
-    yA.href = base + '#search/has%3Ayellow-star';
-    yA.target = '_top';
-    yA.setAttribute('aria-label','Yellow Star');
-    yA.setAttribute('tabindex','-1');
-    yA.setAttribute('draggable','false');
-    yA.textContent = 'Yellow ★';
+    var yA = document.createElement("a");
+    yA.className = "J-Ke n0";
+    yA.href = base + "#search/has%3Ayellow-star";
+    yA.target = "_top";
+    yA.setAttribute("aria-label", "Yellow Star");
+    yA.setAttribute("tabindex", "-1");
+    yA.setAttribute("draggable", "false");
+    yA.textContent = "Yellow";
 
-    yMain.addEventListener('click', function (e) { e.preventDefault(); window.location.href = yA.href; });
+    yMain.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = yA.href;
+    });
 
     ySpan.appendChild(yA);
-    var yRight = document.createElement('div'); yRight.className = 'nL aif';
+    var yRight = document.createElement("div");
+    yRight.className = "nL aif";
 
     yWrap.appendChild(ySpan);
     yInner2.appendChild(yIcon);
@@ -158,28 +199,31 @@
     yMain.appendChild(yInner1);
 
     if (active) {
-      yMain.classList.add('ain');
-      yInner1.classList.add('nZ','aiq');
+      yMain.classList.add("ain");
+      yInner1.classList.add("nZ", "aiq");
     }
     return yMain;
   }
 
   function buildWhiteStarIcon() {
-    var yIcon = document.createElement('div');
-    yIcon.className = 'qj';
-    yIcon.style.background = 'none';
-    yIcon.style.backgroundImage = 'none';
-    yIcon.style.display = 'flex';
-    yIcon.style.alignItems = 'center';
-    yIcon.style.justifyContent = 'center';
-    var svgNS = 'http://www.w3.org/2000/svg';
-    var svg = document.createElementNS(svgNS, 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('width', '18');
-    svg.setAttribute('height', '18');
-    var path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('d','M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z');
-    path.setAttribute('fill','#ffffff');
+    var yIcon = document.createElement("div");
+    yIcon.className = "qj";
+    yIcon.style.background = "none";
+    yIcon.style.backgroundImage = "none";
+    yIcon.style.display = "flex";
+    yIcon.style.alignItems = "center";
+    yIcon.style.justifyContent = "center";
+    var svgNS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", "18");
+    svg.setAttribute("height", "18");
+    var path = document.createElementNS(svgNS, "path");
+    path.setAttribute(
+      "d",
+      "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+    );
+    path.setAttribute("fill", "#ffffff");
     svg.appendChild(path);
     yIcon.appendChild(svg);
     return yIcon;
@@ -189,32 +233,42 @@
     var base = window.location.origin + window.location.pathname;
     var active = isActive(hashFrag);
 
-    var m = document.createElement('div');
-    m.id = mainId; m.className = 'aim';
+    var m = document.createElement("div");
+    m.id = mainId;
+    m.className = "aim";
 
-    var i1 = document.createElement('div');
-    i1.id = innerId; i1.className = 'TO aS3';
-    i1.setAttribute('data-tooltip', tooltip);
-    i1.setAttribute('data-tooltip-align','r');
+    var i1 = document.createElement("div");
+    i1.id = innerId;
+    i1.className = "TO aS3";
+    i1.setAttribute("data-tooltip", tooltip);
+    i1.setAttribute("data-tooltip-align", "r");
 
-    var i2 = document.createElement('div'); i2.className = 'TN UKr6le';
+    var i2 = document.createElement("div");
+    i2.className = "TN UKr6le";
     var icon = buildWhiteStarIcon();
-    var wrap = document.createElement('div'); wrap.className = 'aio UKr6le';
-    var span = document.createElement('span'); span.className = 'nU';
+    var wrap = document.createElement("div");
+    wrap.className = "aio UKr6le";
+    var span = document.createElement("span");
+    span.className = "nU";
 
-    var a = document.createElement('a');
-    a.className = 'J-Ke n0';
-    a.href = base + '#search/' + encodeURIComponent(hashFrag.slice('#search/'.length));
-    a.target = '_top';
-    a.setAttribute('aria-label', tooltip);
-    a.setAttribute('tabindex','-1');
-    a.setAttribute('draggable','false');
+    var a = document.createElement("a");
+    a.className = "J-Ke n0";
+    a.href =
+      base + "#search/" + encodeURIComponent(hashFrag.slice("#search/".length));
+    a.target = "_top";
+    a.setAttribute("aria-label", tooltip);
+    a.setAttribute("tabindex", "-1");
+    a.setAttribute("draggable", "false");
     a.textContent = labelText;
 
-    m.addEventListener('click', function (e) { e.preventDefault(); window.location.href = a.href; });
+    m.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location.href = a.href;
+    });
 
     span.appendChild(a);
-    var right = document.createElement('div'); right.className = 'nL aif';
+    var right = document.createElement("div");
+    right.className = "nL aif";
 
     wrap.appendChild(span);
     i2.appendChild(icon);
@@ -224,17 +278,21 @@
     m.appendChild(i1);
 
     if (active) {
-      m.classList.add('ain');
-      i1.classList.add('nZ','aiq');
+      m.classList.add("ain");
+      i1.classList.add("nZ", "aiq");
     }
     return m;
   }
 
   function insertAtIndex(list, row, index) {
     const kids = list ? list.children : null;
-    if (!kids) { list.appendChild(row); return; }
+    if (!kids) {
+      list.appendChild(row);
+      return;
+    }
     const target = kids[index] || null;
-    if (target) list.insertBefore(row, target); else list.appendChild(row);
+    if (target) list.insertBefore(row, target);
+    else list.appendChild(row);
   }
 
   // Find the first user label row (top of the Labels section)
@@ -242,14 +300,14 @@
     if (!list) return null;
     var anchors = list.querySelectorAll('a.J-Ke.n0[href*="#label/"]');
     for (var i = 0; i < anchors.length; i++) {
-      var aim = anchors[i].closest && anchors[i].closest('.aim');
+      var aim = anchors[i].closest && anchors[i].closest(".aim");
       if (aim && aim.parentNode === list) return aim;
     }
     return null;
   }
 
   function lastCustomStarRow(list) {
-    var ids = [YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
+    var ids = [UNREAD_ID, YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
     for (var i = ids.length - 1; i >= 0; i--) {
       var el = document.getElementById(ids[i]);
       if (el && el.parentNode === list) return el;
@@ -258,8 +316,13 @@
   }
 
   function insertUnread(list) {
-    if (!document.getElementById(UNREAD_ID)) {
-      insertAtIndex(list, buildUnreadRow(), 1); // between Inbox and Starred
+    if (document.getElementById(UNREAD_ID)) return;
+    var row = buildUnreadRow();
+    var topLabel = firstLabelRow(list);
+    if (topLabel) {
+      list.insertBefore(row, topLabel);
+    } else {
+      list.appendChild(row);
     }
   }
 
@@ -281,60 +344,117 @@
     else if (tail) list.appendChild(newRow);
     else {
       var topLabel = firstLabelRow(list);
-      if (topLabel) list.insertBefore(newRow, topLabel); else list.appendChild(newRow);
+      if (topLabel) list.insertBefore(newRow, topLabel);
+      else list.appendChild(newRow);
     }
   }
 
   function insertRed(list) {
-    if (!document.getElementById(RED_ID)) insertStarAfter(list, buildStarRow(RED_ID, RED_INNER_ID, 'Red ★', 'Red Star', '#search/has:red-star'));
+    if (!document.getElementById(RED_ID))
+      insertStarAfter(
+        list,
+        buildStarRow(
+          RED_ID,
+          RED_INNER_ID,
+          "Red",
+          "Red Star",
+          "#search/has:red-star"
+        )
+      );
   }
   function insertGreen(list) {
-    if (!document.getElementById(GREEN_ID)) insertStarAfter(list, buildStarRow(GREEN_ID, GREEN_INNER_ID, 'Green ★', 'Green Star', '#search/has:green-star'));
+    if (!document.getElementById(GREEN_ID))
+      insertStarAfter(
+        list,
+        buildStarRow(
+          GREEN_ID,
+          GREEN_INNER_ID,
+          "Green",
+          "Green Star",
+          "#search/has:green-star"
+        )
+      );
   }
   function insertBlue(list) {
-    if (!document.getElementById(BLUE_ID)) insertStarAfter(list, buildStarRow(BLUE_ID, BLUE_INNER_ID, 'Blue ★', 'Blue Star', '#search/has:blue-star'));
+    if (!document.getElementById(BLUE_ID))
+      insertStarAfter(
+        list,
+        buildStarRow(
+          BLUE_ID,
+          BLUE_INNER_ID,
+          "Blue",
+          "Blue Star",
+          "#search/has:blue-star"
+        )
+      );
   }
   function insertPurple(list) {
-    if (!document.getElementById(PURPLE_ID)) insertStarAfter(list, buildStarRow(PURPLE_ID, PURPLE_INNER_ID, 'Purple ★', 'Purple Star', '#search/has:purple-star'));
+    if (!document.getElementById(PURPLE_ID))
+      insertStarAfter(
+        list,
+        buildStarRow(
+          PURPLE_ID,
+          PURPLE_INNER_ID,
+          "Purple",
+          "Purple Star",
+          "#search/has:purple-star"
+        )
+      );
   }
 
   function refreshActiveStates() {
-    var activeUnread = (location.hash === '#search/is%3Aunread');
+    var activeUnread = isActive("#search/is:unread");
     var uInner = document.getElementById(UNREAD_INNER_ID);
-    var uMain  = document.getElementById(UNREAD_ID);
+    var uMain = document.getElementById(UNREAD_ID);
     if (uInner && uMain) {
-      uMain.className  = activeUnread ? 'aim ain' : 'aim';
-      uInner.className = activeUnread ? 'TO aS3 nZ aiq' : 'TO aS3';
+      uMain.className = activeUnread ? "aim ain" : "aim";
+      uInner.className = activeUnread ? "TO aS3 nZ aiq" : "TO aS3";
     }
 
-    var activeYellow = isActive('#search/has:yellow-star');
+    var activeYellow = isActive("#search/has:yellow-star");
     var yInner = document.getElementById(YELLOW_INNER_ID);
-    var yMain  = document.getElementById(YELLOW_ID);
+    var yMain = document.getElementById(YELLOW_ID);
     if (yInner && yMain) {
-      yMain.classList.toggle('ain', activeYellow);
-      yInner.classList.toggle('nZ', activeYellow);
-      yInner.classList.toggle('aiq', activeYellow);
+      yMain.classList.toggle("ain", activeYellow);
+      yInner.classList.toggle("nZ", activeYellow);
+      yInner.classList.toggle("aiq", activeYellow);
     }
 
-    var redActive = isActive('#search/has:red-star');
+    var redActive = isActive("#search/has:red-star");
     var rInner = document.getElementById(RED_INNER_ID);
-    var rMain  = document.getElementById(RED_ID);
-    if (rInner && rMain) { rMain.classList.toggle('ain', redActive); rInner.classList.toggle('nZ', redActive); rInner.classList.toggle('aiq', redActive); }
+    var rMain = document.getElementById(RED_ID);
+    if (rInner && rMain) {
+      rMain.classList.toggle("ain", redActive);
+      rInner.classList.toggle("nZ", redActive);
+      rInner.classList.toggle("aiq", redActive);
+    }
 
-    var greenActive = isActive('#search/has:green-star');
+    var greenActive = isActive("#search/has:green-star");
     var gInner = document.getElementById(GREEN_INNER_ID);
-    var gMain  = document.getElementById(GREEN_ID);
-    if (gInner && gMain) { gMain.classList.toggle('ain', greenActive); gInner.classList.toggle('nZ', greenActive); gInner.classList.toggle('aiq', greenActive); }
+    var gMain = document.getElementById(GREEN_ID);
+    if (gInner && gMain) {
+      gMain.classList.toggle("ain", greenActive);
+      gInner.classList.toggle("nZ", greenActive);
+      gInner.classList.toggle("aiq", greenActive);
+    }
 
-    var blueActive = isActive('#search/has:blue-star');
+    var blueActive = isActive("#search/has:blue-star");
     var bInner = document.getElementById(BLUE_INNER_ID);
-    var bMain  = document.getElementById(BLUE_ID);
-    if (bInner && bMain) { bMain.classList.toggle('ain', blueActive); bInner.classList.toggle('nZ', blueActive); bInner.classList.toggle('aiq', blueActive); }
+    var bMain = document.getElementById(BLUE_ID);
+    if (bInner && bMain) {
+      bMain.classList.toggle("ain", blueActive);
+      bInner.classList.toggle("nZ", blueActive);
+      bInner.classList.toggle("aiq", blueActive);
+    }
 
-    var purpleActive = isActive('#search/has:purple-star');
+    var purpleActive = isActive("#search/has:purple-star");
     var pInner = document.getElementById(PURPLE_INNER_ID);
-    var pMain  = document.getElementById(PURPLE_ID);
-    if (pInner && pMain) { pMain.classList.toggle('ain', purpleActive); pInner.classList.toggle('nZ', purpleActive); pInner.classList.toggle('aiq', purpleActive); }
+    var pMain = document.getElementById(PURPLE_ID);
+    if (pInner && pMain) {
+      pMain.classList.toggle("ain", purpleActive);
+      pInner.classList.toggle("nZ", purpleActive);
+      pInner.classList.toggle("aiq", purpleActive);
+    }
   }
 
   async function boot() {
@@ -347,9 +467,13 @@
     insertBlue(list);
     insertPurple(list);
     refreshActiveStates();
-    window.addEventListener('hashchange', refreshActiveStates);
+    window.addEventListener("hashchange", refreshActiveStates);
   }
 
-  if (document.readyState === 'complete' || document.readyState === 'interactive') boot();
-  else window.addEventListener('load', boot, { once: true });
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  )
+    boot();
+  else window.addEventListener("load", boot, { once: true });
 })();
