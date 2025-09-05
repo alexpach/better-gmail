@@ -1,5 +1,19 @@
 // content.js — Unread + Yellow ★ (stable insert once, no observers)
 (function () {
+  // User options (enabled + order) support
+  var DEFAULT_SETTINGS = {
+    order: ["unread", "yellow", "red", "green", "blue", "purple"],
+    enabled: {
+      unread: true,
+      yellow: true,
+      red: true,
+      green: true,
+      blue: true,
+      purple: true,
+    },
+  };
+  var STORAGE_KEY = "betterGmailSidebar";
+
   var UNREAD_ID = "BVid1";
   var UNREAD_INNER_ID = "BVid2";
   var YELLOW_ID = "YVid1";
@@ -19,6 +33,32 @@
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   function isActive(hash) {
     return decodeURIComponent(location.hash || "") === hash;
+  }
+
+  function normalizeSettings(s) {
+    var known = DEFAULT_SETTINGS.order.slice();
+    var set = new Set(known);
+    var order = Array.isArray(s && s.order) ? s.order.filter(function (k) { return set.has(k); }) : known.slice();
+    // Ensure all keys appear exactly once
+    known.forEach(function (k) { if (order.indexOf(k) === -1) order.push(k); });
+    var enabled = Object.assign({}, DEFAULT_SETTINGS.enabled, s && s.enabled);
+    return { order: order, enabled: enabled };
+  }
+
+  function getSettings() {
+    return new Promise(function (resolve) {
+      try {
+        if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.sync) {
+          chrome.storage.sync.get(STORAGE_KEY, function (obj) {
+            resolve(normalizeSettings(obj && obj[STORAGE_KEY]));
+          });
+        } else {
+          resolve(DEFAULT_SETTINGS);
+        }
+      } catch (e) {
+        resolve(DEFAULT_SETTINGS);
+      }
+    });
   }
 
   // Wait until the sidebar stops changing before inserting (prevents flicker/dupes)
@@ -336,10 +376,12 @@
   }
 
   function lastCustomStarRow(list) {
-    var ids = [UNREAD_ID, YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
-    for (var i = ids.length - 1; i >= 0; i--) {
-      var el = document.getElementById(ids[i]);
-      if (el && el.parentNode === list) return el;
+    if (!list) return null;
+    var set = new Set([UNREAD_ID, YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID]);
+    var kids = list.children ? Array.from(list.children) : [];
+    for (var i = kids.length - 1; i >= 0; i--) {
+      var el = kids[i];
+      if (set.has(el.id)) return el;
     }
     return null;
   }
@@ -357,14 +399,7 @@
 
   function insertYellow(list) {
     if (document.getElementById(YELLOW_ID)) return;
-    var row = buildYellowRow();
-    var topLabel = firstLabelRow(list);
-    if (topLabel) {
-      list.insertBefore(row, topLabel);
-    } else {
-      // Fallback: append at the end if no labels section is present
-      list.appendChild(row);
-    }
+    insertStarAfter(list, buildYellowRow());
   }
 
   function insertStarAfter(list, newRow) {
@@ -489,12 +524,19 @@
   async function boot() {
     const list = await waitForStableTK();
     if (!list) return;
-    insertUnread(list);
-    insertYellow(list);
-    insertRed(list);
-    insertGreen(list);
-    insertBlue(list);
-    insertPurple(list);
+    var settings = await getSettings();
+    var order = settings.order || DEFAULT_SETTINGS.order;
+    var enabled = settings.enabled || DEFAULT_SETTINGS.enabled;
+    for (var idx = 0; idx < order.length; idx++) {
+      var key = order[idx];
+      if (!enabled[key]) continue;
+      if (key === "unread") insertUnread(list);
+      else if (key === "yellow") insertYellow(list);
+      else if (key === "red") insertRed(list);
+      else if (key === "green") insertGreen(list);
+      else if (key === "blue") insertBlue(list);
+      else if (key === "purple") insertPurple(list);
+    }
     refreshActiveStates();
     window.addEventListener("hashchange", refreshActiveStates);
   }
