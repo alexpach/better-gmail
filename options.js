@@ -45,10 +45,22 @@
     });
   }
 
+  let __pillTimer = null;
   function setStatus(msg) {
-    const el = $("#status");
-    el.textContent = msg || "";
-    if (msg) setTimeout(() => (el.textContent = ""), 1500);
+    const pill = $("#save-pill");
+    if (!pill) return;
+    if (__pillTimer) { clearTimeout(__pillTimer); __pillTimer = null; }
+    if (msg) {
+      pill.textContent = msg;
+      pill.classList.add('is-visible');
+      __pillTimer = setTimeout(() => {
+        pill.classList.remove('is-visible');
+        pill.textContent = '';
+      }, 1200);
+    } else {
+      pill.classList.remove('is-visible');
+      pill.textContent = '';
+    }
   }
 
   function move(li, dir) {
@@ -60,13 +72,46 @@
       parent.insertBefore(li.nextElementSibling, li);
     }
   }
-
-  function bindRowControls() {
+  
+  function bindDragAndSave() {
+    const list = $("#rows-list");
+    let dragging = null;
+    list.addEventListener("dragstart", (e) => {
+      const li = e.target && e.target.closest && e.target.closest("li[draggable]");
+      if (!li) return;
+      dragging = li;
+      li.classList.add("dragging");
+      try { e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setData("text/plain", li.dataset.key || ""); } catch (_) {}
+    });
+    list.addEventListener("dragover", (e) => {
+      if (!dragging) return;
+      e.preventDefault();
+      const over = e.target && e.target.closest && e.target.closest("li[draggable]");
+      if (!over || over === dragging) return;
+      const rect = over.getBoundingClientRect();
+      const before = (e.clientY - rect.top) < rect.height / 2;
+      over.classList.add("drag-over");
+      if (before) list.insertBefore(dragging, over); else list.insertBefore(dragging, over.nextSibling);
+    });
+    ["dragleave", "drop"].forEach((ev) => {
+      list.addEventListener(ev, (e) => {
+        const li = e.target && e.target.closest && e.target.closest("li[draggable]");
+        if (li) li.classList.remove("drag-over");
+        if (ev === "drop") { e.preventDefault(); save(); }
+      });
+    });
+    list.addEventListener("dragend", () => {
+      if (dragging) dragging.classList.remove("dragging");
+      dragging = null;
+      save();
+    });
+    // Keyboard fallback: Alt+ArrowUp/Down on a row moves it
     $all("#rows-list li").forEach((li) => {
-      const up = li.querySelector(".up");
-      const down = li.querySelector(".down");
-      up.addEventListener("click", () => move(li, -1));
-      down.addEventListener("click", () => move(li, 1));
+      li.addEventListener("keydown", (e) => {
+        if (!e.altKey) return;
+        if (e.key === "ArrowUp") { move(li, -1); save(); e.preventDefault(); }
+        else if (e.key === "ArrowDown") { move(li, 1); save(); e.preventDefault(); }
+      });
     });
   }
 
@@ -98,7 +143,7 @@
   function save() {
     const s = currentSettingsFromUI();
     try {
-      chrome.storage.sync.set({ [STORAGE_KEY]: s }, () => setStatus("Saved."));
+      chrome.storage.sync.set({ [STORAGE_KEY]: s }, () => setStatus("Saved"));
     } catch (e) {
       setStatus("Unable to save in this browser.");
     }
@@ -107,18 +152,35 @@
   function reset() {
     try {
       chrome.storage.sync.set({ [STORAGE_KEY]: DEFAULT }, () => {
-        load().then(() => setStatus("Reset to defaults."));
+        load().then(() => setStatus("Reset"));
       });
     } catch (e) {
       setStatus("Unable to reset in this browser.");
     }
   }
 
+  function bindImmediateSave() {
+    // Toggle checkboxes save on change
+    $all('#rows-list input[type="checkbox"]').forEach((cb) => {
+      cb.addEventListener("change", save);
+    });
+  }
+
+  function setHeaderFromManifest() {
+    try {
+      const m = chrome.runtime.getManifest();
+      const pill = $("#version-pill");
+      const sub = $("#subtitle");
+      if (pill && m && m.version) pill.textContent = `v${m.version}`;
+      if (sub && m && m.description) sub.textContent = m.description;
+    } catch (e) {}
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    bindRowControls();
-    $("#save").addEventListener("click", save);
+    setHeaderFromManifest();
+    bindImmediateSave();
+    bindDragAndSave();
     $("#reset").addEventListener("click", reset);
     load();
   });
 })();
-

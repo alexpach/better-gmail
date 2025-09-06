@@ -3,13 +3,13 @@
 Active items only. Completed work has been removed.
 
 ## Options Page Polish
-- [ ] Update design and layout to match `chrome://settings/` styles.
-- [ ] Use system fonts, section headers, and spacing consistent with Chrome Settings.
-- [ ] Align controls (toggles, checkboxes) and descriptions; ensure keyboard/focus states.
-- [ ] Keep storage logic as-is; verify changes persist and reflect in Gmail.
+- [x] Update design and layout to match `chrome://settings/` styles.
+- [x] Use system fonts, section headers, and spacing consistent with Chrome Settings.
+- [x] Align controls (toggles, drag handles) and ensure keyboard/focus states.
+- [x] Keep storage logic as-is; auto-save changes and reflect in Gmail immediately.
 
 ## Theming
-- [ ] Support light theme: star glyphs should be dark on light backgrounds.
+- [x] Support light theme: star glyphs should be dark on light backgrounds.
 - [ ] Choose safe colors via CSS variables; avoid hard-coded white icons.
 - [ ] Verify contrast/legibility for both light and dark Gmail themes.
 
@@ -17,7 +17,7 @@ Active items only. Completed work has been removed.
 - [ ] Optional: add ESLint/Prettier with a minimal config (no build step needed).
 
 ## Store Prep (Chrome Web Store)
-- [ ] Bump version (suggest 1.1.0) and update changelog.
+- [ ] Update changelog and release notes.
 - [ ] Prepare descriptions (short/long), feature bullets, and privacy statement.
 - [ ] Capture screenshots (e.g., 1280×800) showing Unread and star rows, and Options.
 - [ ] Verify icons (16/32/48/128) and branding compliance.

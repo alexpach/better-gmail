@@ -5,81 +5,160 @@
     <title>Better Gmail Sidebar — Options</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
-      h1 { font-size: 1.25rem; margin: 0 0 12px; }
+      :root { color-scheme: light dark; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+        color: rgb(32,33,36);
+        background: rgb(248,249,250);
+      }
+      @media (prefers-color-scheme: dark) {
+        body { color: #e8eaed; background: #202124; }
+      }
+
+      .page { max-width: 860px; margin: 0 auto; padding: 24px; }
+
+      /* Header like Chrome settings */
+      .header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 16px 20px; border-radius: 12px;
+        background: #fff; border: 1px solid rgba(60,64,67,0.15);
+        box-shadow: 0 1px 2px rgba(60,64,67,0.15);
+      }
+      @media (prefers-color-scheme: dark) {
+        .header { background:#2b2c2f; border-color: rgba(255,255,255,0.12); box-shadow: none; }
+      }
+      .title { display: flex; flex-direction: column; gap: 4px; }
+      .title h1 { font-size: 1.35rem; line-height: 1.3; margin: 0; }
+      .subtitle { color: #5f6368; font-size: 0.95rem; }
+      @media (prefers-color-scheme: dark) { .subtitle { color: #9aa0a6; } }
+      .pill { font-size: 0.85rem; color: #1967d2; background: #e8f0fe; border: 1px solid #d2e3fc; padding: 2px 8px; border-radius: 999px; }
+      @media (prefers-color-scheme: dark) { .pill { color:#8ab4f8; background:#1e2a3a; border-color:#27496b; } }
+      .pill-ok { color: #137333; background: #e6f4ea; border-color: #cce9d6; }
+      @media (prefers-color-scheme: dark) { .pill-ok { color:#81c995; background:#1b3a2e; border-color:#2d5a43; } }
+      .pill-status { opacity: 0; transition: opacity .15s ease; pointer-events: none; }
+      .pill-status.is-visible { opacity: 1; }
+
+      .header-actions { display: flex; gap: 8px; align-items: center; }
+      .btn {
+        appearance: none; border: 1px solid rgba(60,64,67,0.28); background: #fff; color: #1f1f1f;
+        padding: 6px 12px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
+      }
+      .btn:hover { background: #f6f9fe; border-color: rgba(26,115,232,0.4); }
+      @media (prefers-color-scheme: dark) {
+        .btn { background:#303134; color:#e8eaed; border-color: rgba(255,255,255,0.16); }
+        .btn:hover { background:#3c4043; }
+      }
+
       .section { margin-top: 20px; }
-      ul { list-style: none; padding: 0; margin: 0; max-width: 520px; }
-      li { display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 8px; }
-      .name { flex: 1; }
-      button { padding: 4px 8px; }
-      .row-controls { display: flex; gap: 6px; }
-      .actions { margin-top: 16px; display: flex; gap: 8px; }
-      .status { margin-top: 10px; color: #0a7; min-height: 1.2em; }
+      .card { background:#fff; border:1px solid rgba(60,64,67,0.15); border-radius:12px; padding: 8px 0; }
+      @media (prefers-color-scheme: dark) { .card { background:#2b2c2f; border-color: rgba(255,255,255,0.12); } }
+      .card-header { display:flex; align-items:center; justify-content: space-between; padding: 12px 16px; min-height: 44px; }
+      .card h2 { font-size: 1rem; font-weight: 600; margin: 0; color: #3c4043; }
+      @media (prefers-color-scheme: dark) { .card h2 { color: #e8eaed; } }
+
+      /* List rows */
+      ul { list-style: none; padding: 0; margin: 0; }
+      li {
+        display: grid; grid-template-columns: 28px 1fr auto; align-items: center;
+        gap: 12px; padding: 12px 16px; border-top: 1px solid rgba(60,64,67,0.1);
+      }
+      li:first-child { border-top: none; }
+      li[draggable="true"] .handle { cursor: grab; user-select: none; color: #9aa0a6; }
+      li.drag-over { outline: 2px dashed #8ab4f8; outline-offset: -6px; }
+      .name { font-size: 0.98rem; }
+
+      /* Toggle switch */
+      .switch { position: relative; width: 36px; height: 20px; display: inline-block; }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .track { position: absolute; inset: 0; background: #dadce0; border-radius: 999px; transition: background .18s ease; }
+      .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: transform .18s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+      input:checked + .track { background: #1a73e8; }
+      input:checked + .track::after { transform: translateX(16px); }
+      @media (prefers-color-scheme: dark) {
+        .track { background: #5f6368; }
+        .track::after { background: #e8eaed; box-shadow: none; }
+      }
+
+      .hint { color: #5f6368; font-size: 0.9rem; padding: 8px 16px 12px; }
+      @media (prefers-color-scheme: dark) { .hint { color: #9aa0a6; } }
+
+      /* No bottom status row; feedback appears in header pill */
     </style>
   </head>
   <body>
-    <h1>Better Gmail Sidebar — Options</h1>
-    <div class="section">
-      <p>Choose which rows to show and their order.</p>
-      <ul id="rows-list">
-        <li data-key="unread">
-          <input type="checkbox" id="cb-unread" />
-          <label class="name" for="cb-unread">Unread</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-        <li data-key="yellow">
-          <input type="checkbox" id="cb-yellow" />
-          <label class="name" for="cb-yellow">Yellow Star</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-        <li data-key="red">
-          <input type="checkbox" id="cb-red" />
-          <label class="name" for="cb-red">Red Star</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-        <li data-key="green">
-          <input type="checkbox" id="cb-green" />
-          <label class="name" for="cb-green">Green Star</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-        <li data-key="blue">
-          <input type="checkbox" id="cb-blue" />
-          <label class="name" for="cb-blue">Blue Star</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-        <li data-key="purple">
-          <input type="checkbox" id="cb-purple" />
-          <label class="name" for="cb-purple">Purple Star</label>
-          <div class="row-controls">
-            <button type="button" class="up" aria-label="Move up">↑</button>
-            <button type="button" class="down" aria-label="Move down">↓</button>
-          </div>
-        </li>
-      </ul>
+    <div class="page">
+      <header class="header" role="banner">
+        <div class="title">
+          <h1>Better Gmail Sidebar</h1>
+          <div class="subtitle" id="subtitle">Adds quick Unread and Star-color rows to Gmail.</div>
+        </div>
+        <div class="header-actions">
+          <span class="pill" id="version-pill">v0.0.0</span>
+          <button id="reset" type="button" class="btn" title="Reset to defaults">Reset</button>
+        </div>
+      </header>
 
-      <div class="actions">
-        <button id="save" type="button">Save</button>
-        <button id="reset" type="button">Reset to defaults</button>
-      </div>
-      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <section class="section card">
+        <div class="card-header">
+          <h2>Sidebar Items</h2>
+          <span class="pill pill-ok pill-status" id="save-pill" role="status" aria-live="polite"></span>
+        </div>
+        <div class="hint">Toggle items on or off and drag to reorder.</div>
+        <ul id="rows-list">
+          <li data-key="unread" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Unread</span>
+            <label class="switch" aria-label="Enable Unread">
+              <input type="checkbox" id="cb-unread" />
+              <span class="track"></span>
+            </label>
+          </li>
+          <li data-key="yellow" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Yellow Star</span>
+            <label class="switch" aria-label="Enable Yellow Star">
+              <input type="checkbox" id="cb-yellow" />
+              <span class="track"></span>
+            </label>
+          </li>
+          <li data-key="red" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Red Star</span>
+            <label class="switch" aria-label="Enable Red Star">
+              <input type="checkbox" id="cb-red" />
+              <span class="track"></span>
+            </label>
+          </li>
+          <li data-key="green" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Green Star</span>
+            <label class="switch" aria-label="Enable Green Star">
+              <input type="checkbox" id="cb-green" />
+              <span class="track"></span>
+            </label>
+          </li>
+          <li data-key="blue" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Blue Star</span>
+            <label class="switch" aria-label="Enable Blue Star">
+              <input type="checkbox" id="cb-blue" />
+              <span class="track"></span>
+            </label>
+          </li>
+          <li data-key="purple" draggable="true">
+            <span class="handle" aria-hidden="true">⋮⋮</span>
+            <span class="name">Purple Star</span>
+            <label class="switch" aria-label="Enable Purple Star">
+              <input type="checkbox" id="cb-purple" />
+              <span class="track"></span>
+            </label>
+          </li>
+        </ul>
+      </section>
     </div>
 
     <script src="options.js"></script>
   </body>
   </html>
-

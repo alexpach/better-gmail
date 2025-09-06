@@ -5,7 +5,7 @@ A minimal Chrome extension that adds quick-access rows to the Gmail left sidebar
 Features
 - Unread: one-click filter to show unread messages.
 - Star colors: shortcuts for Yellow, Red, Green, Blue, and Purple stars.
-- Options: enable/disable items and control their order.
+- Options: Chrome Settings–style page to enable/disable items and drag to reorder; changes apply instantly; includes Reset to defaults.
 - Accessibility: rows are focusable and activate via Enter/Space.
 - Lightweight resilience: reconciles after navigation changes, settings updates, and shortly after load.
 - Minimal permissions: uses `storage` only; runs as a content script on Gmail.
@@ -21,9 +21,10 @@ Install (Load Unpacked)
 2) Open `chrome://extensions` in Chrome.
 3) Toggle “Developer mode” on (top right).
 4) Click “Load unpacked” and select the project folder.
-5) In the extension’s “Details”, open “Extension options” to configure order and visibility.
-6) Open Gmail and use the new sidebar rows.
+5) In the extension’s “Details”, open “Extension options” to configure order and visibility. Changes save automatically.
+6) Use drag handles to reorder items; toggle switches to enable/disable.
 7) Optional: Pin the toolbar icon; clicking it opens Options.
+8) Open Gmail and use the new sidebar rows.
 
 Privacy
 - No analytics, no external network requests, and no data collection.
