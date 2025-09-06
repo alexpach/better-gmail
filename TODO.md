@@ -15,6 +15,7 @@ Active items only. Completed work has been removed.
 
 ## Code Hygiene
 - [ ] Optional: add ESLint/Prettier with a minimal config (no build step needed).
+- [x] Fix Options selector bug for keys containing ':' by using row-scoped queries.
 
 ## Store Prep (Chrome Web Store)
 - [ ] Update changelog and release notes.

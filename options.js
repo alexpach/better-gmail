@@ -117,13 +117,15 @@
 
   async function load() {
     const s = await getSettings();
-    // Checkboxes
-    Object.entries(s.enabled).forEach(([key, val]) => {
-      const cb = $(`#cb-${key}`);
-      if (cb) cb.checked = !!val;
-    });
-    // Order: reorder <li>s to match saved order
     const list = $("#rows-list");
+    // Apply checkbox states only for known keys present in the DOM
+    s.order.forEach((key) => {
+      const li = list.querySelector(`li[data-key="${key}"]`);
+      if (!li) return;
+      const cb = li.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = !!s.enabled[key];
+    });
+    // Reorder <li>s to match saved order (known keys only)
     s.order.forEach((key) => {
       const li = list.querySelector(`li[data-key="${key}"]`);
       if (li) list.appendChild(li);
@@ -133,8 +135,9 @@
   function currentSettingsFromUI() {
     const order = $all("#rows-list li").map((li) => li.getAttribute("data-key"));
     const enabled = {};
-    order.forEach((key) => {
-      const cb = $(`#cb-${key}`);
+    $all('#rows-list li').forEach((li) => {
+      const key = li.getAttribute('data-key');
+      const cb = li.querySelector('input[type="checkbox"]');
       enabled[key] = !!(cb && cb.checked);
     });
     return { order, enabled };
