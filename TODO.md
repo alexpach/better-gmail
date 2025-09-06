@@ -10,12 +10,12 @@ Active items only. Completed work has been removed.
 - [x] Optional: add ESLint/Prettier with a minimal config (no build step needed).
 
 ## Store Prep (Chrome Web Store)
-- [ ] Update changelog and release notes.
-- [ ] Prepare descriptions (short/long), feature bullets, and privacy statement.
-- [ ] Capture screenshots (e.g., 1280×800) showing Unread and star rows, and Options.
+- [x] Update changelog and release notes.
+- [x] Prepare descriptions (short/long), feature bullets, and privacy statement.
+- [x] Capture screenshots (e.g., 1280×800) showing Unread and star rows, and Options.
 - [ ] Verify icons (16/32/48/128) and branding compliance.
-- [ ] Confirm minimal permissions (`storage`, Gmail host) and MV3 validity.
-- [ ] Package a clean ZIP (exclude `.git`, `.vscode`, etc.).
+- [x] Confirm minimal permissions (`storage`, Gmail host) and MV3 validity.
+- [x] Package a clean ZIP (exclude `.git`, `.vscode`, etc.).
 
 ## Low Priority: DOM Robustness (Deferred)
 - [ ] Prefer cloning a nearby native row (e.g., Starred or a label) to inherit Gmail classes.
