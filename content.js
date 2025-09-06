@@ -54,6 +54,14 @@
     return '#454746';
   }
 
+  // Apply icon color via CSS variable for safer theming overrides
+  function applyIconThemeVar() {
+    try {
+      var color = computeIconColor();
+      document.documentElement.style.setProperty('--bgs-icon', color);
+    } catch (e) {}
+  }
+
   // Lightweight debounce helper
   function debounce(fn, wait) {
     var t = null;
@@ -213,7 +221,7 @@
     yInner2.className = "TN UKr6le"; // generic; avoids Gmail special-casing
 
     var yIcon = document.createElement("div");
-    yIcon.className = "qj";
+    yIcon.className = "qj bgs";
     // Remove Gmail's sprite background so only our SVG shows
     yIcon.style.background = "none";
     yIcon.style.backgroundImage = "none";
@@ -236,8 +244,8 @@
     path.setAttribute("fill", "currentColor");
     svg.appendChild(path);
     yIcon.appendChild(svg);
-    // Theme-aware color
-    yIcon.style.color = computeIconColor();
+    // Theme-aware color via CSS var fallback
+    yIcon.style.color = 'var(--bgs-icon, #454746)';
 
     var yWrap = document.createElement("div");
     yWrap.className = "aio UKr6le";
@@ -290,7 +298,7 @@
 
   function buildWhiteStarIcon() {
     var yIcon = document.createElement("div");
-    yIcon.className = "qj";
+    yIcon.className = "qj bgs";
     yIcon.style.background = "none";
     yIcon.style.backgroundImage = "none";
     yIcon.style.display = "flex";
@@ -309,20 +317,13 @@
     path.setAttribute("fill", "currentColor");
     svg.appendChild(path);
     yIcon.appendChild(svg);
-    yIcon.style.color = computeIconColor();
+    yIcon.style.color = 'var(--bgs-icon, #454746)';
     return yIcon;
   }
 
   function recolorCustomIcons() {
     try {
-      var ids = [YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
-      var color = computeIconColor();
-      for (var i = 0; i < ids.length; i++) {
-        var row = document.getElementById(ids[i]);
-        if (!row) continue;
-        var icon = row.querySelector('.qj');
-        if (icon) icon.style.color = color;
-      }
+      applyIconThemeVar();
     } catch (e) {}
   }
 
@@ -656,6 +657,7 @@
       else if (key === "purple") insertPurple(list);
     }
     refreshActiveStates();
+    applyIconThemeVar();
     // Events: keep active states and lightly reconcile
     window.addEventListener("hashchange", function () {
       refreshActiveStates();

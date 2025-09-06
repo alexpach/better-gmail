@@ -2,6 +2,11 @@ Changelog
 
 All notable changes to Better Gmail Sidebar will be documented here.
 
+1.1.2 — Theming + hygiene
+- Theming: icons use CSS variable `--bgs-icon` with automatic light/dark contrast fallback (white on dark, #454746 on light).
+- Code hygiene: add minimal ESLint + Prettier configs (no build step required).
+- Docs: README notes theming; TODO updated.
+
 1.1.1 — Options robustness fix
 - Fixed: Options checkboxes no longer use invalid `querySelector` IDs for keys that may contain `:` (future-proof for dynamic star keys). Row‑scoped selectors used instead.
 - Minor: Options CSS now uses variables for easier theming (no behavioral change).

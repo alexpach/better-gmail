@@ -10,6 +10,7 @@ Features
 - Lightweight resilience: reconciles after navigation changes, settings updates, and shortly after load.
 - Minimal permissions: uses `storage` only; runs as a content script on Gmail.
  - Toolbar action: click the extension icon to open Options.
+ - Theming: icon color uses CSS variables and adapts to light/dark for good contrast.
 
 Supported Browser/Site
 - Chrome (Manifest V3)
