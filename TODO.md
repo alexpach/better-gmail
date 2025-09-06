@@ -1,26 +1,41 @@
 # Better Gmail Sidebar — Remaining TODO
 
-Focused list of next improvements, trimmed to active items only.
+Active items only. Completed work has been removed.
 
-## DOM Robustness (Deferred)
-No changes for this version per scope decision.
+## Options Page Polish
+- [ ] Update design and layout to match `chrome://settings/` styles.
+- [ ] Use system fonts, section headers, and spacing consistent with Chrome Settings.
+- [ ] Align controls (toggles, checkboxes) and descriptions; ensure keyboard/focus states.
+- [ ] Keep storage logic as-is; verify changes persist and reflect in Gmail.
 
-## Manifest & UX
-- [x] Add an `action` that opens Options and uses the same icon set.
-- [x] Validate MV3 compliance and keep permissions minimal (content script + storage only).
+## Theming
+- [ ] Support light theme: star glyphs should be dark on light backgrounds.
+- [ ] Choose safe colors via CSS variables; avoid hard-coded white icons.
+- [ ] Verify contrast/legibility for both light and dark Gmail themes.
 
 ## Code Hygiene
-- [x] Remove unused `getStarredClasses`.
 - [ ] Optional: add ESLint/Prettier with a minimal config (no build step needed).
-- [x] Add brief comments to document key selectors.
 
-## Documentation
-- [x] README: confirm install steps, features, privacy; note toolbar action.
-- [x] README: include brief support/issue details.
+## Store Prep (Chrome Web Store)
+- [ ] Bump version (suggest 1.1.0) and update changelog.
+- [ ] Prepare descriptions (short/long), feature bullets, and privacy statement.
+- [ ] Capture screenshots (e.g., 1280×800) showing Unread and star rows, and Options.
+- [ ] Verify icons (16/32/48/128) and branding compliance.
+- [ ] Confirm minimal permissions (`storage`, Gmail host) and MV3 validity.
+- [ ] Package a clean ZIP (exclude `.git`, `.vscode`, etc.).
+
+## Low Priority: DOM Robustness (Deferred)
+- [ ] Prefer cloning a nearby native row (e.g., Starred or a label) to inherit Gmail classes.
+- [ ] Replace brittle hardcoded class sets where safe; keep current classes as fallback.
+- [ ] Centralize selectors/classnames in a small helper to ease future updates.
+- [ ] Provide a fallback to the current manual-build path if cloning fails.
+- [ ] Acceptance: visual parity, keyboard nav works, no duplicate IDs/ARIA.
 
 ---
 
 Suggested Implementation Order
-1. Manifest & UX
-2. Documentation
-3. Code Hygiene polish (optional tooling)
+1. Options Page Polish
+2. Theming
+3. Store Prep
+4. Code Hygiene (optional)
+5. DOM Robustness (low priority)

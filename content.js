@@ -35,6 +35,25 @@
     return decodeURIComponent(location.hash || "") === hash;
   }
 
+  // Decide icon color based on Gmail theme. On light backgrounds use #454746,
+  // on dark backgrounds keep icons white for sufficient contrast.
+  function computeIconColor() {
+    try {
+      var label = document.querySelector('.TK .aim .nU');
+      var cs = label && window.getComputedStyle(label);
+      if (cs) {
+        var m = (cs.color || '').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (m) {
+          var r = parseInt(m[1], 10), g = parseInt(m[2], 10), b = parseInt(m[3], 10);
+          var brightness = (r * 299 + g * 587 + b * 114) / 1000; // 0..255
+          // If label text is very bright, assume dark theme; keep icon white.
+          if (brightness > 200) return '#ffffff';
+        }
+      }
+    } catch (e) {}
+    return '#454746';
+  }
+
   // Lightweight debounce helper
   function debounce(fn, wait) {
     var t = null;
@@ -203,7 +222,7 @@
     yIcon.style.alignItems = "center";
     yIcon.style.justifyContent = "center";
 
-    // Inline SVG star (forced white)
+    // Inline SVG star (use currentColor)
     var svgNS = "http://www.w3.org/2000/svg";
     var svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
@@ -214,9 +233,11 @@
       "d",
       "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
     );
-    path.setAttribute("fill", "#ffffff");
+    path.setAttribute("fill", "currentColor");
     svg.appendChild(path);
     yIcon.appendChild(svg);
+    // Theme-aware color
+    yIcon.style.color = computeIconColor();
 
     var yWrap = document.createElement("div");
     yWrap.className = "aio UKr6le";
@@ -285,10 +306,24 @@
       "d",
       "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
     );
-    path.setAttribute("fill", "#ffffff");
+    path.setAttribute("fill", "currentColor");
     svg.appendChild(path);
     yIcon.appendChild(svg);
+    yIcon.style.color = computeIconColor();
     return yIcon;
+  }
+
+  function recolorCustomIcons() {
+    try {
+      var ids = [YELLOW_ID, RED_ID, GREEN_ID, BLUE_ID, PURPLE_ID];
+      var color = computeIconColor();
+      for (var i = 0; i < ids.length; i++) {
+        var row = document.getElementById(ids[i]);
+        if (!row) continue;
+        var icon = row.querySelector('.qj');
+        if (icon) icon.style.color = color;
+      }
+    } catch (e) {}
   }
 
   function buildStarRow(mainId, innerId, labelText, tooltip, hashFrag) {
@@ -474,6 +509,8 @@
           else list.appendChild(el);
         }
       }
+      // Ensure theme-aware icon color after any insert/reorder
+      recolorCustomIcons();
     } catch (e) {
       // swallow to avoid impacting page
     } finally {
@@ -623,10 +660,12 @@
     window.addEventListener("hashchange", function () {
       refreshActiveStates();
       ensureRowsDebounced();
+      recolorCustomIcons();
     });
 
     // Apply a post-boot reconcile to catch late UI shifts
     setTimeout(ensureRows, 1200);
+    setTimeout(recolorCustomIcons, 1300);
 
     // Live-update on options changes
     try {
