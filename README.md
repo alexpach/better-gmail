@@ -19,7 +19,16 @@ Supported Browser/Site
 - Gmail at `https://mail.google.com/*`
 - Note: Other browsers or sites are not currently supported.
 
-Install (Load Unpacked)
+Install (Chrome Web Store)
+
+The extension is published on the Chrome Web Store:
+
+1. Find “Better Gmail Sidebar” on the [Chrome Web Store](https://chromewebstore.google.com/search/Better%20Gmail%20Sidebar). <!-- TODO: replace with the direct listing URL -->
+2. Click “Add to Chrome” and confirm.
+3. Optional: Pin the toolbar icon; clicking it opens Options.
+4. Open Gmail and use the new sidebar rows. Configure order and visibility via the extension’s Options page — changes save automatically.
+
+Install from Source (Load Unpacked, for development)
 
 1. Download or clone this repository.
 2. Open `chrome://extensions` in Chrome.

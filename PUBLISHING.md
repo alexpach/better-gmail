@@ -59,7 +59,10 @@ Release Notes (Examples)
 - 1.1.1: Options robustness fix for keys with ‘:’; CSS variables for Options.
 - 1.1.0: Chrome Settings–style Options redesign; instant save; drag‑reorder; Saved pill.
 
-Submission Checklist
+Status
+- Published: version 1.1.2 is live on the Chrome Web Store.
+
+Submission Checklist (template for future releases)
 - [ ] Bump version in manifest.json (SemVer rules per CODEX.md)
 - [ ] Update CHANGELOG.md and README.md if needed
 - [ ] Verify icons render at 16/24/32/48/128
