@@ -74,3 +74,21 @@ Notes
 - Runs strictly on https://mail.google.com/* and uses only storage permission.
 - English‑only labels by design.
 
+Store Privacy Form Answers
+
+Use these concise answers in the Chrome Web Store “Privacy” section of the listing form.
+
+- Single purpose description
+  Better Gmail Sidebar adds quick Unread and Star‑color shortcuts to Gmail’s left sidebar so users can filter messages with one click. The extension only modifies the Gmail sidebar UI and provides an Options page to enable/disable and reorder these shortcuts.
+
+- storage justification
+  The extension saves the user’s preferences (which shortcuts are enabled and their order) using chrome.storage.sync so those options persist across sessions and, if the user is signed into Chrome, can sync to their other Chrome profiles. No email content or personal data is stored.
+
+- Host permission justification (https://mail.google.com/*)
+  The extension needs access to Gmail pages to add its sidebar shortcuts and to handle clicks that navigate to the corresponding Gmail search URLs (e.g., #search/is:unread). It does not access other sites and does not collect any data from Gmail beyond what is needed to render and operate the sidebar rows.
+
+- Are you using remote code?
+  No, I am not using remote code.
+
+- Remote code justification (if a text field still appears)
+  All JavaScript, HTML, and CSS are packaged with the extension. The extension does not load code from external URLs, does not evaluate strings via eval(), and does not include dynamic Wasm modules. There are no analytics SDKs or third‑party libraries fetched at runtime.
