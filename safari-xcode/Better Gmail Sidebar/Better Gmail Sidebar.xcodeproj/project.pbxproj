@@ -1,0 +1,653 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FAC70EAF2FDB353200E8033C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC70EAE2FDB353200E8033C /* AppDelegate.swift */; };
+		FAC70EB32FDB353200E8033C /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EB12FDB353200E8033C /* Main.html */; };
+		FAC70EB52FDB353200E8033C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EB42FDB353200E8033C /* Icon.png */; };
+		FAC70EB72FDB353200E8033C /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EB62FDB353200E8033C /* Style.css */; };
+		FAC70EB92FDB353200E8033C /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EB82FDB353200E8033C /* Script.js */; };
+		FAC70EBB2FDB353200E8033C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC70EBA2FDB353200E8033C /* ViewController.swift */; };
+		FAC70EBE2FDB353200E8033C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EBC2FDB353200E8033C /* Main.storyboard */; };
+		FAC70EC02FDB353300E8033C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EBF2FDB353300E8033C /* Assets.xcassets */; };
+		FAC70EC72FDB353300E8033C /* Better Gmail Sidebar Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FAC70EC62FDB353300E8033C /* Better Gmail Sidebar Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FAC70ECC2FDB353300E8033C /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC70ECB2FDB353300E8033C /* SafariWebExtensionHandler.swift */; };
+		FAC70EE72FDB353300E8033C /* screenshots in Resources */ = {isa = PBXBuildFile; fileRef = FAC70ED82FDB353300E8033C /* screenshots */; };
+		FAC70EE82FDB353300E8033C /* PUBLISHING.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70ED92FDB353300E8033C /* PUBLISHING.md */; };
+		FAC70EE92FDB353300E8033C /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDA2FDB353300E8033C /* CHANGELOG.md */; };
+		FAC70EEA2FDB353300E8033C /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDB2FDB353300E8033C /* background.js */; };
+		FAC70EEB2FDB353300E8033C /* options.js in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDC2FDB353300E8033C /* options.js */; };
+		FAC70EEC2FDB353300E8033C /* PRIVACY.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDD2FDB353300E8033C /* PRIVACY.md */; };
+		FAC70EED2FDB353300E8033C /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDE2FDB353300E8033C /* TODO.md */; };
+		FAC70EEE2FDB353300E8033C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EDF2FDB353300E8033C /* README.md */; };
+		FAC70EEF2FDB353300E8033C /* CODEX.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE02FDB353300E8033C /* CODEX.md */; };
+		FAC70EF02FDB353300E8033C /* icons in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE12FDB353300E8033C /* icons */; };
+		FAC70EF12FDB353300E8033C /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE22FDB353300E8033C /* manifest.json */; };
+		FAC70EF22FDB353300E8033C /* NEXT-STEPS.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE32FDB353300E8033C /* NEXT-STEPS.md */; };
+		FAC70EF32FDB353300E8033C /* SAFARI-BUILD.md in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE42FDB353300E8033C /* SAFARI-BUILD.md */; };
+		FAC70EF42FDB353300E8033C /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE52FDB353300E8033C /* options.html */; };
+		FAC70EF52FDB353300E8033C /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = FAC70EE62FDB353300E8033C /* content.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAC70EC82FDB353300E8033C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAC70EA32FDB353200E8033C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAC70EC52FDB353300E8033C;
+			remoteInfo = "Better Gmail Sidebar Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FAC70ED32FDB353300E8033C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FAC70EC72FDB353300E8033C /* Better Gmail Sidebar Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FAC70EAB2FDB353200E8033C /* Better Gmail Sidebar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Better Gmail Sidebar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC70EAE2FDB353200E8033C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FAC70EB22FDB353200E8033C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		FAC70EB42FDB353200E8033C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FAC70EB62FDB353200E8033C /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		FAC70EB82FDB353200E8033C /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		FAC70EBA2FDB353200E8033C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAC70EBD2FDB353200E8033C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FAC70EBF2FDB353300E8033C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAC70EC12FDB353300E8033C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAC70EC62FDB353300E8033C /* Better Gmail Sidebar Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Better Gmail Sidebar Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAC70ECB2FDB353300E8033C /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		FAC70ECD2FDB353300E8033C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAC70ED82FDB353300E8033C /* screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; name = screenshots; path = ../../../safari/screenshots; sourceTree = "<group>"; };
+		FAC70ED92FDB353300E8033C /* PUBLISHING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PUBLISHING.md; path = ../../../safari/PUBLISHING.md; sourceTree = "<group>"; };
+		FAC70EDA2FDB353300E8033C /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../../../safari/CHANGELOG.md; sourceTree = "<group>"; };
+		FAC70EDB2FDB353300E8033C /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../../safari/background.js; sourceTree = "<group>"; };
+		FAC70EDC2FDB353300E8033C /* options.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = options.js; path = ../../../safari/options.js; sourceTree = "<group>"; };
+		FAC70EDD2FDB353300E8033C /* PRIVACY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = PRIVACY.md; path = ../../../safari/PRIVACY.md; sourceTree = "<group>"; };
+		FAC70EDE2FDB353300E8033C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = TODO.md; path = ../../../safari/TODO.md; sourceTree = "<group>"; };
+		FAC70EDF2FDB353300E8033C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../safari/README.md; sourceTree = "<group>"; };
+		FAC70EE02FDB353300E8033C /* CODEX.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CODEX.md; path = ../../../safari/CODEX.md; sourceTree = "<group>"; };
+		FAC70EE12FDB353300E8033C /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../../safari/icons; sourceTree = "<group>"; };
+		FAC70EE22FDB353300E8033C /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../safari/manifest.json; sourceTree = "<group>"; };
+		FAC70EE32FDB353300E8033C /* NEXT-STEPS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "NEXT-STEPS.md"; path = "../../../safari/NEXT-STEPS.md"; sourceTree = "<group>"; };
+		FAC70EE42FDB353300E8033C /* SAFARI-BUILD.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "SAFARI-BUILD.md"; path = "../../../safari/SAFARI-BUILD.md"; sourceTree = "<group>"; };
+		FAC70EE52FDB353300E8033C /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../../safari/options.html; sourceTree = "<group>"; };
+		FAC70EE62FDB353300E8033C /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../../safari/content.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FAC70EA82FDB353200E8033C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAC70EC32FDB353300E8033C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FAC70EA22FDB353200E8033C = {
+			isa = PBXGroup;
+			children = (
+				FAC70EAD2FDB353200E8033C /* Better Gmail Sidebar */,
+				FAC70ECA2FDB353300E8033C /* Better Gmail Sidebar Extension */,
+				FAC70EAC2FDB353200E8033C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FAC70EAC2FDB353200E8033C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAC70EAB2FDB353200E8033C /* Better Gmail Sidebar.app */,
+				FAC70EC62FDB353300E8033C /* Better Gmail Sidebar Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAC70EAD2FDB353200E8033C /* Better Gmail Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				FAC70EAE2FDB353200E8033C /* AppDelegate.swift */,
+				FAC70EBA2FDB353200E8033C /* ViewController.swift */,
+				FAC70EBC2FDB353200E8033C /* Main.storyboard */,
+				FAC70EBF2FDB353300E8033C /* Assets.xcassets */,
+				FAC70EC12FDB353300E8033C /* Info.plist */,
+				FAC70EB02FDB353200E8033C /* Resources */,
+			);
+			path = "Better Gmail Sidebar";
+			sourceTree = "<group>";
+		};
+		FAC70EB02FDB353200E8033C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FAC70EB12FDB353200E8033C /* Main.html */,
+				FAC70EB42FDB353200E8033C /* Icon.png */,
+				FAC70EB62FDB353200E8033C /* Style.css */,
+				FAC70EB82FDB353200E8033C /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FAC70ECA2FDB353300E8033C /* Better Gmail Sidebar Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FAC70ED72FDB353300E8033C /* Resources */,
+				FAC70ECB2FDB353300E8033C /* SafariWebExtensionHandler.swift */,
+				FAC70ECD2FDB353300E8033C /* Info.plist */,
+			);
+			path = "Better Gmail Sidebar Extension";
+			sourceTree = "<group>";
+		};
+		FAC70ED72FDB353300E8033C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FAC70ED82FDB353300E8033C /* screenshots */,
+				FAC70ED92FDB353300E8033C /* PUBLISHING.md */,
+				FAC70EDA2FDB353300E8033C /* CHANGELOG.md */,
+				FAC70EDB2FDB353300E8033C /* background.js */,
+				FAC70EDC2FDB353300E8033C /* options.js */,
+				FAC70EDD2FDB353300E8033C /* PRIVACY.md */,
+				FAC70EDE2FDB353300E8033C /* TODO.md */,
+				FAC70EDF2FDB353300E8033C /* README.md */,
+				FAC70EE02FDB353300E8033C /* CODEX.md */,
+				FAC70EE12FDB353300E8033C /* icons */,
+				FAC70EE22FDB353300E8033C /* manifest.json */,
+				FAC70EE32FDB353300E8033C /* NEXT-STEPS.md */,
+				FAC70EE42FDB353300E8033C /* SAFARI-BUILD.md */,
+				FAC70EE52FDB353300E8033C /* options.html */,
+				FAC70EE62FDB353300E8033C /* content.js */,
+			);
+			name = Resources;
+			path = "Better Gmail Sidebar Extension";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FAC70EAA2FDB353200E8033C /* Better Gmail Sidebar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAC70ED42FDB353300E8033C /* Build configuration list for PBXNativeTarget "Better Gmail Sidebar" */;
+			buildPhases = (
+				FAC70EA72FDB353200E8033C /* Sources */,
+				FAC70EA82FDB353200E8033C /* Frameworks */,
+				FAC70EA92FDB353200E8033C /* Resources */,
+				FAC70ED32FDB353300E8033C /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FAC70EC92FDB353300E8033C /* PBXTargetDependency */,
+			);
+			name = "Better Gmail Sidebar";
+			packageProductDependencies = (
+			);
+			productName = "Better Gmail Sidebar";
+			productReference = FAC70EAB2FDB353200E8033C /* Better Gmail Sidebar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FAC70EC52FDB353300E8033C /* Better Gmail Sidebar Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAC70ED02FDB353300E8033C /* Build configuration list for PBXNativeTarget "Better Gmail Sidebar Extension" */;
+			buildPhases = (
+				FAC70EC22FDB353300E8033C /* Sources */,
+				FAC70EC32FDB353300E8033C /* Frameworks */,
+				FAC70EC42FDB353300E8033C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Better Gmail Sidebar Extension";
+			packageProductDependencies = (
+			);
+			productName = "Better Gmail Sidebar Extension";
+			productReference = FAC70EC62FDB353300E8033C /* Better Gmail Sidebar Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FAC70EA32FDB353200E8033C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					FAC70EAA2FDB353200E8033C = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					FAC70EC52FDB353300E8033C = {
+						CreatedOnToolsVersion = 26.5;
+					};
+				};
+			};
+			buildConfigurationList = FAC70EA62FDB353200E8033C /* Build configuration list for PBXProject "Better Gmail Sidebar" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FAC70EA22FDB353200E8033C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FAC70EAC2FDB353200E8033C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FAC70EAA2FDB353200E8033C /* Better Gmail Sidebar */,
+				FAC70EC52FDB353300E8033C /* Better Gmail Sidebar Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FAC70EA92FDB353200E8033C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC70EB52FDB353200E8033C /* Icon.png in Resources */,
+				FAC70EBE2FDB353200E8033C /* Main.storyboard in Resources */,
+				FAC70EB92FDB353200E8033C /* Script.js in Resources */,
+				FAC70EB32FDB353200E8033C /* Main.html in Resources */,
+				FAC70EC02FDB353300E8033C /* Assets.xcassets in Resources */,
+				FAC70EB72FDB353200E8033C /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAC70EC42FDB353300E8033C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC70EEA2FDB353300E8033C /* background.js in Resources */,
+				FAC70EE72FDB353300E8033C /* screenshots in Resources */,
+				FAC70EED2FDB353300E8033C /* TODO.md in Resources */,
+				FAC70EF22FDB353300E8033C /* NEXT-STEPS.md in Resources */,
+				FAC70EF02FDB353300E8033C /* icons in Resources */,
+				FAC70EE92FDB353300E8033C /* CHANGELOG.md in Resources */,
+				FAC70EF12FDB353300E8033C /* manifest.json in Resources */,
+				FAC70EF42FDB353300E8033C /* options.html in Resources */,
+				FAC70EE82FDB353300E8033C /* PUBLISHING.md in Resources */,
+				FAC70EF52FDB353300E8033C /* content.js in Resources */,
+				FAC70EEF2FDB353300E8033C /* CODEX.md in Resources */,
+				FAC70EEB2FDB353300E8033C /* options.js in Resources */,
+				FAC70EEE2FDB353300E8033C /* README.md in Resources */,
+				FAC70EEC2FDB353300E8033C /* PRIVACY.md in Resources */,
+				FAC70EF32FDB353300E8033C /* SAFARI-BUILD.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FAC70EA72FDB353200E8033C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC70EBB2FDB353200E8033C /* ViewController.swift in Sources */,
+				FAC70EAF2FDB353200E8033C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAC70EC22FDB353300E8033C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAC70ECC2FDB353300E8033C /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FAC70EC92FDB353300E8033C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAC70EC52FDB353300E8033C /* Better Gmail Sidebar Extension */;
+			targetProxy = FAC70EC82FDB353300E8033C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FAC70EB12FDB353200E8033C /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAC70EB22FDB353200E8033C /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		FAC70EBC2FDB353200E8033C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAC70EBD2FDB353200E8033C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FAC70ECE2FDB353300E8033C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FAC70ECF2FDB353300E8033C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		FAC70ED12FDB353300E8033C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better Gmail Sidebar Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Gmail Sidebar Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunflower-labs.better-gmail-sidebar.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FAC70ED22FDB353300E8033C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better Gmail Sidebar Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Gmail Sidebar Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunflower-labs.better-gmail-sidebar.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FAC70ED52FDB353300E8033C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better Gmail Sidebar/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Gmail Sidebar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunflower-labs.better-gmail-sidebar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FAC70ED62FDB353300E8033C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Better Gmail Sidebar/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Gmail Sidebar";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sunflower-labs.better-gmail-sidebar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FAC70EA62FDB353200E8033C /* Build configuration list for PBXProject "Better Gmail Sidebar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC70ECE2FDB353300E8033C /* Debug */,
+				FAC70ECF2FDB353300E8033C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAC70ED02FDB353300E8033C /* Build configuration list for PBXNativeTarget "Better Gmail Sidebar Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC70ED12FDB353300E8033C /* Debug */,
+				FAC70ED22FDB353300E8033C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAC70ED42FDB353300E8033C /* Build configuration list for PBXNativeTarget "Better Gmail Sidebar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAC70ED52FDB353300E8033C /* Debug */,
+				FAC70ED62FDB353300E8033C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FAC70EA32FDB353200E8033C /* Project object */;
+}
